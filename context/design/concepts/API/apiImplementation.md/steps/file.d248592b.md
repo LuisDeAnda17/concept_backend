@@ -1,3 +1,12 @@
+---
+timestamp: 'Mon Oct 20 2025 16:47:05 GMT-0400 (Eastern Daylight Time)'
+parent: '[[..\20251020_164705.74a0093e.md]]'
+content_id: d248592be3b627a2129bc6acd06269e221193d9394776356c527ea6825e931e0
+---
+
+# file: src\concepts\BrontoBoard\BrontoBoardConcept.ts
+
+```typescript
 import { Collection, Db } from "npm:mongodb";
 import { ID, Empty } from "@utils/types.ts"; // Assuming @utils/types.ts provides ID and Empty
 import { freshID } from "@utils/database.ts"; // Assuming @utils/database.ts provides freshID
@@ -222,8 +231,6 @@ export default class BrontoBoardConcept {
   }): Promise<{ assignment: ID } | { error: string }> {
     const { owner, class: classId, workName, dueDate } = input;
 
-    const parsedDueDate = new Date(dueDate);
-
     // Precondition 1: User is owner of the BrontoBoard associated with the class
     const classCheck = await this._getClassIfBrontoBoardOwned(classId, owner);
     if ("error" in classCheck) {
@@ -237,7 +244,7 @@ export default class BrontoBoardConcept {
 
     // Precondition 3: dueDate not empty and not before current date
     // Note: Assuming a valid Date object is provided.
-    if (!parsedDueDate || isNaN(parsedDueDate.getTime()) || parsedDueDate < new Date()) {
+    if (!dueDate || isNaN(dueDate.getTime()) || dueDate < new Date()) {
       return { error: "Due date must be a valid future date." };
     }
 
@@ -246,7 +253,7 @@ export default class BrontoBoardConcept {
       _id: newAssignmentId,
       classId: classId,
       name: workName.trim(),
-      dueDate: parsedDueDate,
+      dueDate: dueDate,
     });
 
     if (!result.acknowledged) {
@@ -509,3 +516,4 @@ export default class BrontoBoardConcept {
     return await this.brontoBoards.find({ owner: userId }).toArray();
   }
 }
+```
