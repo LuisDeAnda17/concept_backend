@@ -44,3 +44,7 @@ No Major design changes were made to BrontoCalendar
 
 #### Design Changes
 No Major design changes were made to User Authentication.
+
+# Assignment 4b: Frontend UI Coding:
+## Design Changes to Backend:
+No major changes were done to the back end implementations of the concepts. No additional queries or actions were necessary, and all current actions and queries are in working order. The only change was parsing a date recieved to a usable Date type as its apperantly isn't the same when in a request.
