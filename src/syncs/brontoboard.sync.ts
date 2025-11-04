@@ -875,13 +875,13 @@ export const GetBrontoBoardsForUserRequest: Sync = ({
   when: actions(
     [Requesting.request, { path: "/BrontoBoard/getBrontoBoardsForUser", session }, { request }],
   ),
-  // where: async (frames) => {
-  //   // 1. Get user from session
-  //   // frames = await frames.query(Sessioning._getUser, { session }, { user });
-  //   // if (frames.length === 0) return frames; // Session invalid or not found
-  //   // return frames; // No further authorization needed for this specific query
-  //   return await frames.query(Sessioning._getUser, { session }, { user });
-  // },
+  where: async (frames) => {
+    // 1. Get user from session
+    // frames = await frames.query(Sessioning._getUser, { session }, { user });
+    // if (frames.length === 0) return frames; // Session invalid or not found
+    // return frames; // No further authorization needed for this specific query
+    return await frames.query(Sessioning._getUser, { session }, { user });
+  },
   then: actions(
     // If session is valid, call the BrontoBoard query
     [BrontoBoard.getBrontoBoardsForUser, { user }, { brontoBoards }],
@@ -897,7 +897,7 @@ export const GetBrontoBoardsForUserResponse: Sync = ({ request, brontoBoards }) 
     [BrontoBoard.getBrontoBoardsForUser, {}, { brontoBoards }],
   ),
   then: actions(
-    [Requesting.respond, { request, brontoBoards }],
+    [Requesting.respond, { request, results: brontoBoards }],
   ),
 });
 
