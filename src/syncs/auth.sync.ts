@@ -43,7 +43,7 @@ export const AuthenticateRequestTrigger: Sync = (
   { request, username, password },
 ) => ({
   when: actions(
-    [Requesting.request, { path: "/authenticate", username, password }, { request }],
+    [Requesting.request, { path: "/UserAuthentication/authenticate", username, password }, { request }],
   ),
   then: actions(
     [UserAuthentication.authenticate, { username, password }],
@@ -53,7 +53,7 @@ export const AuthenticateRequestTrigger: Sync = (
 // 5. Handle successful authentication: create a session and respond
 export const AuthenticateSuccessResponse: Sync = ({ request, user, session }) => ({
   when: actions(
-    [Requesting.request, { path: "/authenticate" }, { request }],
+    [Requesting.request, { path: "/UserAuthentication/authenticate" }, { request }],
     [UserAuthentication.authenticate, {}, { user }], // Matches successful authentication
   ),
   then: actions(
@@ -65,7 +65,7 @@ export const AuthenticateSuccessResponse: Sync = ({ request, user, session }) =>
 // 6. Handle authentication error: respond with the error
 export const AuthenticateErrorResponse: Sync = ({ request, error }) => ({
   when: actions(
-    [Requesting.request, { path: "/authenticate" }, { request }],
+    [Requesting.request, { path: "/UserAuthentication/authenticate" }, { request }],
     [UserAuthentication.authenticate, {}, { error }], // Matches failed authentication
   ),
   then: actions(
