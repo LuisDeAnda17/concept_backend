@@ -28,7 +28,7 @@ interface SessionDoc {
  */
 export default class SessioningConcept {
   // MongoDB collection to store session documents
-  sessions: Collection<SessionDoc>;
+  private sessions: Collection<SessionDoc>;
 
   /**
    * Constructor for the SessioningConcept.
@@ -72,16 +72,26 @@ export default class SessioningConcept {
    * @returns A Promise resolving to an empty object on success, or an error object if the session is not found.
    */
   async delete({ session }: { session: Session }): Promise<Empty | { error: string }> {
-    // Attempt to delete the session document by its ID
-    const result = await this.sessions.deleteOne({ _id: session });
+    // // Attempt to delete the session document by its ID
+    // const result = await this.sessions.deleteOne({ _id: session });
 
-    // If no document was deleted, it means the session did not exist.
-    // As per concept design, normal errors should return an error object.
-    if (result.deletedCount === 0) {
-      return { error: `Session '${session}' not found.` };
+    // // If no document was deleted, it means the session did not exist.
+    // // As per concept design, normal errors should return an error object.
+    // if (result.deletedCount === 0) {
+    //   return { error: `Session '${session}' not found.` };
+    // }
+
+    // return {}; // Return an empty object to indicate successful deletion    
+    try {
+      await this.sessions.deleteOne({ _id: session });
+      return {};
+    } catch (error) {
+      console.error(
+        "❌ Error deleting session",
+        (error as Error).message,
+      );
+      return { error: (error as Error).message };
     }
-
-    return {}; // Return an empty object to indicate successful deletion
   }
 
   /**
