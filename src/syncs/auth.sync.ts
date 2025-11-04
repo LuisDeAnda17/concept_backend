@@ -58,6 +58,16 @@ export const AuthenticateSuccessResponse: Sync = ({ request, user, session }) =>
   ),
   then: actions(
     [Sessioning.create, { user }, { session }], // Create a new session for the authenticated user
+  ),
+});
+
+export const AuthenticateSuccessResponse2: Sync = ({ request, user, session }) => ({
+  when: actions(
+    [Requesting.request, { path: "/UserAuthentication/authenticate" }, { request }],
+    [UserAuthentication.authenticate, {}, { user }], // Matches successful authentication
+    [Sessioning.create, { user }, { session }], // Create a new session for the authenticated user
+  ),
+  then: actions(
     [Requesting.respond, { request, user, session }], // Respond with user ID and new session ID
   ),
 });
