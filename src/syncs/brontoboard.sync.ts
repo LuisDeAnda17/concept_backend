@@ -16,7 +16,7 @@ export const InitializeBBRequest: Sync = (
   when: actions(
     [
       Requesting.request,
-      { path: "/api/brontoboard/initialize", session, calendar },
+      { path: "BrontoBoard/initializeBB", session, calendar },
       { request },
     ],
   ),
@@ -42,7 +42,7 @@ export const InitializeBBResponse: Sync = (
   when: actions(
     [
       Requesting.request,
-      { path: "/api/brontoboard/initialize" },
+      { path: "BrontoBoard/initializeBB" },
       { request },
     ],
     [BrontoBoard.initializeBB, {}, { brontoBoard }], // Matches success output
@@ -59,7 +59,7 @@ export const InitializeBBError: Sync = ({ request, error }) => ({
   when: actions(
     [
       Requesting.request,
-      { path: "/api/brontoboard/initialize" },
+      { path: "BrontoBoard/initializeBB" },
       { request },
     ],
     [BrontoBoard.initializeBB, {}, { error }], // Matches error output
@@ -81,7 +81,7 @@ export const CreateClassRequest: Sync = (
   when: actions(
     [
       Requesting.request,
-      { path: "/api/brontoboard/class/create", session, brontoBoard, className, overview },
+      { path: "/BrontoBoard/createClass", session, brontoBoard, className, overview },
       { request },
     ],
   ),
@@ -108,7 +108,7 @@ export const CreateClassResponse: Sync = (
   { request, class: newClass }, // Renamed 'class' to 'newClass' to avoid keyword conflict
 ) => ({
   when: actions(
-    [Requesting.request, { path: "/api/brontoboard/class/create" }, { request }],
+    [Requesting.request, { path: "/BrontoBoard/createClass" }, { request }],
     [BrontoBoard.createClass, {}, { class: newClass }], // Matches success output
   ),
   then: actions(
@@ -121,7 +121,7 @@ export const CreateClassResponse: Sync = (
  */
 export const CreateClassError: Sync = ({ request, error }) => ({
   when: actions(
-    [Requesting.request, { path: "/api/brontoboard/class/create" }, { request }],
+    [Requesting.request, { path: "/BrontoBoard/createClass" }, { request }],
     [BrontoBoard.createClass, {}, { error }], // Matches error output
   ),
   then: actions(
@@ -141,7 +141,7 @@ export const AddWorkRequest: Sync = (
   when: actions(
     [
       Requesting.request,
-      { path: "/api/brontoboard/assignment/add", session, class: classId, workName, dueDate },
+      { path: "/BrontoBoard/addWork", session, class: classId, workName, dueDate },
       { request },
     ],
   ),
@@ -167,7 +167,7 @@ export const AddWorkResponse: Sync = (
   { request, assignment },
 ) => ({
   when: actions(
-    [Requesting.request, { path: "/api/brontoboard/assignment/add" }, { request }],
+    [Requesting.request, { path: "/BrontoBoard/addWork" }, { request }],
     [BrontoBoard.addWork, {}, { assignment }], // Matches success output
   ),
   then: actions(
@@ -180,7 +180,7 @@ export const AddWorkResponse: Sync = (
  */
 export const AddWorkError: Sync = ({ request, error }) => ({
   when: actions(
-    [Requesting.request, { path: "/api/brontoboard/assignment/add" }, { request }],
+    [Requesting.request, { path: "/BrontoBoard/addWork" }, { request }],
     [BrontoBoard.addWork, {}, { error }], // Matches error output
   ),
   then: actions(
@@ -200,7 +200,7 @@ export const ChangeWorkRequest: Sync = (
   when: actions(
     [
       Requesting.request,
-      { path: "/api/brontoboard/assignment/change", session, work, dueDate },
+      { path: "/BrontoBoard/changeWork", session, work, dueDate },
       { request },
     ],
   ),
@@ -222,7 +222,7 @@ export const ChangeWorkRequest: Sync = (
  */
 export const ChangeWorkResponse: Sync = ({ request }) => ({
   when: actions(
-    [Requesting.request, { path: "/api/brontoboard/assignment/change" }, { request }],
+    [Requesting.request, { path: "/BrontoBoard/changeWork" }, { request }],
     [BrontoBoard.changeWork, {}, {}], // Matches success (empty) output
   ),
   then: actions(
@@ -235,7 +235,7 @@ export const ChangeWorkResponse: Sync = ({ request }) => ({
  */
 export const ChangeWorkError: Sync = ({ request, error }) => ({
   when: actions(
-    [Requesting.request, { path: "/api/brontoboard/assignment/change" }, { request }],
+    [Requesting.request, { path: "/BrontoBoard/changeWork" }, { request }],
     [BrontoBoard.changeWork, {}, { error }], // Matches error output
   ),
   then: actions(
@@ -255,7 +255,7 @@ export const RemoveWorkRequest: Sync = (
   when: actions(
     [
       Requesting.request,
-      { path: "/api/brontoboard/assignment/remove", session, work },
+      { path: "/BrontoBoard/removeWork", session, work },
       { request },
     ],
   ),
@@ -277,7 +277,7 @@ export const RemoveWorkRequest: Sync = (
  */
 export const RemoveWorkResponse: Sync = ({ request }) => ({
   when: actions(
-    [Requesting.request, { path: "/api/brontoboard/assignment/remove" }, { request }],
+    [Requesting.request, { path: "/BrontoBoard/removeWork" }, { request }],
     [BrontoBoard.removeWork, {}, {}], // Matches success (empty) output
   ),
   then: actions(
@@ -290,7 +290,7 @@ export const RemoveWorkResponse: Sync = ({ request }) => ({
  */
 export const RemoveWorkError: Sync = ({ request, error }) => ({
   when: actions(
-    [Requesting.request, { path: "/api/brontoboard/assignment/remove" }, { request }],
+    [Requesting.request, { path: "/BrontoBoard/removeWork" }, { request }],
     [BrontoBoard.removeWork, {}, { error }], // Matches error output
   ),
   then: actions(
