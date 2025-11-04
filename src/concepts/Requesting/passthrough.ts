@@ -36,6 +36,13 @@ export const inclusions: Record<string, string> = {
   "/api/BrontoBoard/getClassIfBrontoBoardOwned": "Added as inclusion for now to force push",//
   
   "/api/BrontoBoard/getBrontoBoardsForUser":"a",
+  "/api/BrontoBoard/getAssignmentsForClass":"a",
+  "/api/BrontoBoard/getOfficeHoursForClass":"a",
+  "/api/BrontoBoard/getClassesForBrontoBoard":"a",
+  "/api/BrontoBoard/getBrontoBoardById":"a",
+  "/api/BrontoBoard/getClassById":"a",
+  "/api/BrontoBoard/getAssignmentById":"a",
+  "/api/BrontoBoard/getOfficeHourById":"a",
   // BrontoCalendar Calls
   "/api/BrontoCalendar/normalizeDateToKey": "Added as inclusion for now to force push",
   "/api/BrontoCalendar/createCalendar": "Added as inclusion for now to force push",
@@ -84,14 +91,14 @@ export const exclusions: Array<string> = [
   "/api/BrontoBoard/addOH",
   "/api/BrontoBoard/changeOH",
   // BrontoBoard Getter Calls
-  "/api/BrontoBoard/getAssignmentsForClass",
-  "/api/BrontoBoard/getOfficeHoursForClass",
-  "/api/BrontoBoard/getClassesForBrontoBoard",
+  // "/api/BrontoBoard/getAssignmentsForClass",
+  // "/api/BrontoBoard/getOfficeHoursForClass",
+  // "/api/BrontoBoard/getClassesForBrontoBoard",
   // "/api/BrontoBoard/getBrontoBoardsForUser",
-  "/api/BrontoBoard/getBrontoBoardById",
-  "/api/BrontoBoard/getClassById",
-  "/api/BrontoBoard/getAssignmentById",
-  "/api/BrontoBoard/getOfficeHourById",
+  // "/api/BrontoBoard/getBrontoBoardById",
+  // "/api/BrontoBoard/getClassById",
+  // "/api/BrontoBoard/getAssignmentById",
+  // "/api/BrontoBoard/getOfficeHourById",
   
 
   // BrontoCalendar Calls
