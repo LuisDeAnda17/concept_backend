@@ -80,7 +80,7 @@ export default class BrontoBoardConcept {
    * @param ownerId The ID of the user claiming ownership.
    * @returns The BrontoBoardDoc if found and owned, otherwise an error object.
    */
-  private async _getBrontoBoardIfOwned(
+  private async getBrontoBoardIfOwned(
     brontoBoardId: ID,
     ownerId: User,
   ): Promise<BrontoBoardDoc | { error: string }> {
@@ -102,7 +102,7 @@ export default class BrontoBoardConcept {
    * @param ownerId The ID of the user claiming ownership of the parent BrontoBoard.
    * @returns An object containing the ClassDoc and BrontoBoardDoc if valid, otherwise an error object.
    */
-  private async _getClassIfBrontoBoardOwned(
+  private async getClassIfBrontoBoardOwned(
     classId: ID,
     ownerId: User,
   ): Promise<{ class: ClassDoc; brontoBoard: BrontoBoardDoc } | { error: string }> {
@@ -111,12 +111,12 @@ export default class BrontoBoardConcept {
       return { error: `Class with ID ${classId} not found.` };
     }
 
-    const brontoBoardCheck = await this._getBrontoBoardIfOwned(
+    const brontoBoardCheck = await this.getBrontoBoardIfOwned(
       classDoc.brontoBoardId,
       ownerId,
     );
     if ("error" in brontoBoardCheck) {
-      return brontoBoardCheck; // Propagate the error from _getBrontoBoardIfOwned
+      return brontoBoardCheck; // Propagate the error from getBrontoBoardIfOwned
     }
 
     return { class: classDoc, brontoBoard: brontoBoardCheck };
@@ -174,7 +174,7 @@ export default class BrontoBoardConcept {
     const { owner, brontoBoard, className, overview } = input;
 
     // Precondition 1: User is owner of the BrontoBoard
-    const brontoBoardCheck = await this._getBrontoBoardIfOwned(
+    const brontoBoardCheck = await this.getBrontoBoardIfOwned(
       brontoBoard,
       owner,
     );
@@ -225,7 +225,7 @@ export default class BrontoBoardConcept {
     const parsedDueDate = new Date(dueDate);
 
     // Precondition 1: User is owner of the BrontoBoard associated with the class
-    const classCheck = await this._getClassIfBrontoBoardOwned(classId, owner);
+    const classCheck = await this.getClassIfBrontoBoardOwned(classId, owner);
     if ("error" in classCheck) {
       return classCheck;
     }
@@ -279,7 +279,7 @@ export default class BrontoBoardConcept {
     }
 
     // Precondition 1: User is owner of the BrontoBoard associated with the class of the assignment
-    const classCheck = await this._getClassIfBrontoBoardOwned(
+    const classCheck = await this.getClassIfBrontoBoardOwned(
       assignment.classId,
       owner,
     );
@@ -330,7 +330,7 @@ export default class BrontoBoardConcept {
     }
 
     // Precondition 1: User is owner of the BrontoBoard associated with the class of the assignment
-    const classCheck = await this._getClassIfBrontoBoardOwned(
+    const classCheck = await this.getClassIfBrontoBoardOwned(
       assignment.classId,
       owner,
     );
@@ -370,7 +370,7 @@ export default class BrontoBoardConcept {
     const { owner, class: classId, OHTime, OHduration } = input;
 
     // Precondition 1: User is owner of the BrontoBoard associated with the class
-    const classCheck = await this._getClassIfBrontoBoardOwned(classId, owner);
+    const classCheck = await this.getClassIfBrontoBoardOwned(classId, owner);
     if ("error" in classCheck) {
       return classCheck;
     }
@@ -425,7 +425,7 @@ export default class BrontoBoardConcept {
     }
 
     // Precondition 1: User is owner of the BrontoBoard associated with the class of the office hours
-    const classCheck = await this._getClassIfBrontoBoardOwned(
+    const classCheck = await this.getClassIfBrontoBoardOwned(
       officeHours.classId,
       owner,
     );
@@ -471,7 +471,7 @@ export default class BrontoBoardConcept {
    *   - `class`: The ID of the class.
    * @returns An array of assignments for the given class.
    */
-  async _getAssignmentsForClass(input: { class: ID }): Promise<AssignmentDoc[]> {
+  async getAssignmentsForClass(input: { class: ID }): Promise<AssignmentDoc[]> {
     const { class: classId } = input;
     return await this.assignments.find({ classId: classId }).toArray();
   }
@@ -482,7 +482,7 @@ export default class BrontoBoardConcept {
    *   - `class`: The ID of the class.
    * @returns An array of office hours for the given class.
    */
-  async _getOfficeHoursForClass(input: { class: ID }): Promise<OfficeHourDoc[]> {
+  async getOfficeHoursForClass(input: { class: ID }): Promise<OfficeHourDoc[]> {
     const { class: classId } = input;
     return await this.officeHours.find({ classId: classId }).toArray();
   }
@@ -493,7 +493,7 @@ export default class BrontoBoardConcept {
    *   - `brontoBoard`: The ID of the BrontoBoard.
    * @returns An array of classes for the given BrontoBoard.
    */
-  async _getClassesForBrontoBoard(input: { brontoBoard: ID }): Promise<ClassDoc[]> {
+  async getClassesForBrontoBoard(input: { brontoBoard: ID }): Promise<ClassDoc[]> {
     const { brontoBoard: brontoBoardId } = input;
     return await this.classes.find({ brontoBoardId: brontoBoardId }).toArray();
   }
@@ -504,8 +504,48 @@ export default class BrontoBoardConcept {
    *   - `user`: The ID of the user.
    * @returns An array of BrontoBoards owned by the given user.
    */
-  async _getBrontoBoardsForUser(input: { user: User }): Promise<BrontoBoardDoc[]> {
+  async getBrontoBoardsForUser(input: { user: User }): Promise<BrontoBoardDoc[]> {
     const { user: userId } = input;
     return await this.brontoBoards.find({ owner: userId }).toArray();
   }
-}
+  
+  /**
+   * _query: _getBrontoBoardById
+   * @param input An object containing the BrontoBoard ID.
+   * @returns An array containing the BrontoBoardDoc if found, otherwise empty.
+   */
+  async getBrontoBoardById(input: { brontoBoard: ID }): Promise<BrontoBoardDoc[]> {
+    const { brontoBoard } = input;
+    const doc = await this.brontoBoards.findOne({ _id: brontoBoard });
+    return doc ? [doc] : [];
+  }
+
+  /**
+   * _query: _getClassById
+   * @param input An object containing the Class ID.
+   * @returns An array containing the ClassDoc if found, otherwise empty.
+   */
+  async getClassById(input: { class: ID }): Promise<ClassDoc[]> {
+    const { class: classId } = input;
+    const doc = await this.classes.findOne({ _id: classId });
+    return doc ? [doc] : [];
+  }
+
+  async getAssignmentById(input: { assignment: ID }): Promise<AssignmentDoc[]> {
+    const { assignment } = input;
+    const doc = await this.assignments.findOne({ _id: assignment });
+    return doc ? [doc] : [];
+  }
+
+  /**
+   * _query: _getOfficeHourById
+   * @param input An object containing the OfficeHour ID.
+   * @returns An array containing the OfficeHourDoc if found, otherwise empty.
+   */
+  async getOfficeHourById(input: { officeHour: ID }): Promise<OfficeHourDoc[]> {
+    const { officeHour } = input;
+    const doc = await this.officeHours.findOne({ _id: officeHour });
+    return doc ? [doc] : [];
+  }
+};
+

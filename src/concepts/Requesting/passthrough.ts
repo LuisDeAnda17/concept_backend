@@ -32,41 +32,32 @@ export const inclusions: Record<string, string> = {
   "/api/LikertSurvey/submitResponse": "allow anyone to submit response",
   "/api/LikertSurvey/updateResponse": "allow anyone to update their response",
   // BrontoBoard calls
-  "/api/BrontoBoard/_getBrontoBoardIfOwned": "a",
-  "/api/BrontoBoard/_getClassIfBrontoBoardOwned": "a",
-  "/api/BrontoBoard/initializeBB": "a",
-  "/api/BrontoBoard/createClass": "a",
-  "/api/BrontoBoard/addWork": "a",
-  "/api/BrontoBoard/changeWork": "a",
-  "/api/BrontoBoard/removeWork": "a",
-  "/api/BrontoBoard/addOH": "a",
-  "/api/BrontoBoard/changeOH": "a",
-  "/api/BrontoBoard/_getAssignmentsForClass": "a",
-  "/api/BrontoBoard/_getOfficeHoursForClass": "a",
-  "/api/BrontoBoard/_getClassesForBrontoBoard": "a",
-  "/api/BrontoBoard/_getBrontoBoardsForUser": "a",
+  "/api/BrontoBoard/getBrontoBoardIfOwned": "Added as inclusion for now to force push",// 
+  "/api/BrontoBoard/getClassIfBrontoBoardOwned": "Added as inclusion for now to force push",//
   // BrontoCalendar Calls
-  "/api/BrontoCalendar/normalizeDateToKey": "a",
-  "/api/BrontoCalendar/createCalendar": "a",
-  "/api/BrontoCalendar/createAssignment": "a",
-  "/api/BrontoCalendar/assignWork": "a",
-  "/api/BrontoCalendar/removeWork": "a",
-  "/api/BrontoCalendar/updateAssignmentDueDate": "a",
-  "/api/BrontoCalendar/deleteAssignment": "a",
-  "/api/BrontoCalendar/createOfficeHours": "a",
-  "/api/BrontoCalendar/assignOH": "a",
-  "/api/BrontoCalendar/changeOH": "a",
-  "/api/BrontoCalendar/deleteOfficeHours": "a",
-  "/api/BrontoCalendar/_getCalendarForUser": "a",
-  "/api/BrontoCalendar/_getAssignmentsOnDay": "a",
-  "/api/BrontoCalendar/_getOfficeHoursOnDay": "a",
-  "/api/BrontoCalendar/_getAssignment": "a",
-  "/api/BrontoCalendar/_getOfficeHours": "a",
+  "/api/BrontoCalendar/normalizeDateToKey": "Added as inclusion for now to force push",
+  "/api/BrontoCalendar/createCalendar": "Added as inclusion for now to force push",
+  "/api/BrontoCalendar/createAssignment": "Added as inclusion for now to force push",
+  "/api/BrontoCalendar/assignWork": "Added as inclusion for now to force push",
+  "/api/BrontoCalendar/removeWork": "Added as inclusion for now to force push",
+  "/api/BrontoCalendar/updateAssignmentDueDate": "Added as inclusion for now to force push",
+  "/api/BrontoCalendar/deleteAssignment": "Added as inclusion for now to force push",
+  "/api/BrontoCalendar/createOfficeHours": "Added as inclusion for now to force push",
+  "/api/BrontoCalendar/assignOH": "Added as inclusion for now to force push",
+  "/api/BrontoCalendar/changeOH": "Added as inclusion for now to force push",
+  "/api/BrontoCalendar/deleteOfficeHours": "Added as inclusion for now to force push",
+  "/api/BrontoCalendar/_getCalendarForUser": "Added as inclusion for now to force push",
+  "/api/BrontoCalendar/_getAssignmentsOnDay": "Added as inclusion for now to force push",
+  "/api/BrontoCalendar/_getOfficeHoursOnDay": "Added as inclusion for now to force push",
+  "/api/BrontoCalendar/_getAssignment": "Added as inclusion for now to force push",
+  "/api/BrontoCalendar/_getOfficeHours": "Added as inclusion for now to force push",
   //UserAuthentication Calls
-  "/api/UserAuthentication/generateSalt": "a",
-  "/api/UserAuthentication/hashPassword": "a",
-  "/api/UserAuthentication/register": "a",
-  "/api/UserAuthentication/authenticate": "a",
+  "/api/UserAuthentication/generateSalt": "Added as inclusion for now to force push",
+  "/api/UserAuthentication/hashPassword": "Added as inclusion for now to force push",
+  //Sessioning Calls
+  "/api/Sessioning/create":"added for now",
+  "/api/Sessioning/delete":"added for now",
+  "/api/Sessioning/_getUser":"added for now",
 };
 
 /**
@@ -83,4 +74,28 @@ export const exclusions: Array<string> = [
   // Feel free to delete these example exclusions
   "/api/LikertSurvey/createSurvey",
   "/api/LikertSurvey/addQuestion",
+  // BrontoBoard calls
+  "/api/BrontoBoard/initializeBB",
+  "/api/BrontoBoard/createClass",
+  "/api/BrontoBoard/addWork",
+  "/api/BrontoBoard/changeWork",
+  "/api/BrontoBoard/removeWork",
+  "/api/BrontoBoard/addOH",
+  "/api/BrontoBoard/changeOH",
+  // BrontoBoard Getter Calls
+  "/api/BrontoBoard/getAssignmentsForClass",
+  "/api/BrontoBoard/getOfficeHoursForClass",
+  "/api/BrontoBoard/getClassesForBrontoBoard",
+  "/api/BrontoBoard/getBrontoBoardsForUser",
+  "/api/BrontoBoard/getBrontoBoardById",
+  "/api/BrontoBoard/getClassById",
+  "/api/BrontoBoard/getAssignmentById",
+  "/api/BrontoBoard/getOfficeHourById",
+  
+
+  // BrontoCalendar Calls
+
+  // UserAuthentication Calls
+  "/api/UserAuthentication/register",
+  "/api/UserAuthentication/authenticate",
 ];

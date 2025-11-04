@@ -2,7 +2,7 @@
     __purpose:__ Associate an assignment or Exam to a day on a calendar
     __principle:__ Each assignment has one associated day.
     __state:__
-            - a set of Assignments with
+        - a set of Assignments with
             - a classId ID
             - a name string
             - a dueDate Date

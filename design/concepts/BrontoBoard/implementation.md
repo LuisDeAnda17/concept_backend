@@ -519,5 +519,43 @@ export default class BrontoBoardConcept {
     const { user: userId } = input;
     return await this.brontoBoards.find({ owner: userId }).toArray();
   }
+    /**
+   * _query: _getBrontoBoardById
+   * @param input An object containing the BrontoBoard ID.
+   * @returns An array containing the BrontoBoardDoc if found, otherwise empty.
+   */
+  async _getBrontoBoardById(input: { brontoBoard: ID }): Promise<BrontoBoardDoc[]> {
+    const { brontoBoard } = input;
+    const doc = await this.brontoBoards.findOne({ _id: brontoBoard });
+    return doc ? [doc] : [];
+  }
+
+  /**
+   * _query: _getClassById
+   * @param input An object containing the Class ID.
+   * @returns An array containing the ClassDoc if found, otherwise empty.
+   */
+  async _getClassById(input: { class: ID }): Promise<ClassDoc[]> {
+    const { class: classId } = input;
+    const doc = await this.classes.findOne({ _id: classId });
+    return doc ? [doc] : [];
+  }
+
+    async _getAssignmentById(input: { assignment: ID }): Promise<AssignmentDoc[]> {
+    const { assignment } = input;
+    const doc = await this.assignments.findOne({ _id: assignment });
+    return doc ? [doc] : [];
+  }
+
+  /**
+   * _query: _getOfficeHourById
+   * @param input An object containing the OfficeHour ID.
+   * @returns An array containing the OfficeHourDoc if found, otherwise empty.
+   */
+  async _getOfficeHourById(input: { officeHour: ID }): Promise<OfficeHourDoc[]> {
+    const { officeHour } = input;
+    const doc = await this.officeHours.findOne({ _id: officeHour });
+    return doc ? [doc] : [];
+  }
 }
 ```

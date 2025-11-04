@@ -1,0 +1,7 @@
+---
+timestamp: 'Mon Nov 03 2025 21:46:32 GMT-0500 (Eastern Standard Time)'
+parent: '[[..\20251103_214632.09fb6328.md]]'
+content_id: b78f8f24ec5c9a00cb134f434eb5ccc62560b8f71dae5e2421997c25b3ea2b4e
+---
+
+# Implement: Create syncs for the BrontoBoard concept's getter functions in the form of the event being called, a response if successful, and another response if an error occurs, using the Sessiong concept to confirm the user of the session is the owner. All in one file. Don't use a helper function to simplify the authorization and Do Not use an initial frame. In the where portion of the sync of the original call of the function, have its basic form be :  frames = await frames.query(Sessioning.\_getUser, { session }, { user });   return frames; Authorization for all BrontoBoard-related queries (except `_getBrontoBoardsForUser`) follows a chain: 1.  Verify session and get the associated user. 2.  Retrieve the relevant BrontoBoard, Class, Assignment, or OfficeHour document. 3.  Trace up the ownership chain (e.g., Assignment -> Class -> BrontoBoard). 4.  Filter to ensure the user obtained from the session is the owner of the top-level BrontoBoard. The getter functions that use a user for its input should have there where function in the simple format to ensure that only the user of the session is being called for the those functions, and if a function uses an assignment, OH, Class or BrontoBoard, then the user must be the owner of the object.
