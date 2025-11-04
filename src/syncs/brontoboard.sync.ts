@@ -897,7 +897,7 @@ export const GetBrontoBoardsForUserResponse: Sync = ({ request, brontoBoards }) 
     [BrontoBoard.getBrontoBoardsForUser, {}, { brontoBoards }],
   ),
   then: actions(
-    [Requesting.respond, { request, results: brontoBoards }],
+    [Requesting.respond, { request, brontoBoards }],
   ),
 });
 
