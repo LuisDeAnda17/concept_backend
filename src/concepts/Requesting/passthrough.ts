@@ -56,7 +56,6 @@ export const inclusions: Record<string, string> = {
   "/api/UserAuthentication/hashPassword": "Added as inclusion for now to force push",
   //Sessioning Calls
   "/api/Sessioning/create":"added for now",
-  "/api/Sessioning/delete":"added for now",
   "/api/Sessioning/_getUser":"added for now",
 };
 
@@ -98,4 +97,7 @@ export const exclusions: Array<string> = [
   // UserAuthentication Calls
   "/api/UserAuthentication/register",
   "/api/UserAuthentication/authenticate",
+  // Sessioning 
+  
+  "/api/Sessioning/delete",
 ];

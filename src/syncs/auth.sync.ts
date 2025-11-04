@@ -88,7 +88,7 @@ export const AuthenticateErrorResponse: Sync = ({ request, error }) => ({
 // 7. Trigger Sessioning.delete from a /logout request
 export const LogoutRequestTrigger: Sync = ({ request, session }) => ({
   when: actions(
-    [Requesting.request, { path: "/logout", session }, { request }],
+    [Requesting.request, { path: "/Sessioning/delete", session }, { request }],
   ),
   then: actions(
     [Sessioning.delete, { session }],
@@ -98,7 +98,7 @@ export const LogoutRequestTrigger: Sync = ({ request, session }) => ({
 // 8. Handle successful logout: respond with success message
 export const LogoutSuccessResponse: Sync = ({ request }) => ({
   when: actions(
-    [Requesting.request, { path: "/logout" }, { request }],
+    [Requesting.request, { path: "/Sessioning/delete" }, { request }],
     [Sessioning.delete, {}, {}], // Matches successful session deletion (empty object means no error was returned)
   ),
   then: actions(
@@ -109,7 +109,7 @@ export const LogoutSuccessResponse: Sync = ({ request }) => ({
 // 9. Handle logout error: respond with the error (e.g., session not found)
 export const LogoutErrorResponse: Sync = ({ request, error }) => ({
   when: actions(
-    [Requesting.request, { path: "/logout" }, { request }],
+    [Requesting.request, { path: "/Sessioning/delete" }, { request }],
     [Sessioning.delete, {}, { error }], // Matches failed session deletion
   ),
   then: actions(
