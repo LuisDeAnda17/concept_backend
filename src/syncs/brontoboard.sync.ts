@@ -877,9 +877,10 @@ export const GetBrontoBoardsForUserRequest: Sync = ({
   ),
   where: async (frames) => {
     // 1. Get user from session
-    frames = await frames.query(Sessioning._getUser, { session }, { user });
-    if (frames.length === 0) return frames; // Session invalid or not found
-    return frames; // No further authorization needed for this specific query
+    // frames = await frames.query(Sessioning._getUser, { session }, { user });
+    // if (frames.length === 0) return frames; // Session invalid or not found
+    // return frames; // No further authorization needed for this specific query
+    return await frames.query(Sessioning._getUser, { session }, { user });
   },
   then: actions(
     // If session is valid, call the BrontoBoard query
