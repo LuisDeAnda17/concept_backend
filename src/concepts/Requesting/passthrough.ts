@@ -34,6 +34,8 @@ export const inclusions: Record<string, string> = {
   // BrontoBoard calls
   "/api/BrontoBoard/getBrontoBoardIfOwned": "Added as inclusion for now to force push",// 
   "/api/BrontoBoard/getClassIfBrontoBoardOwned": "Added as inclusion for now to force push",//
+  
+  "/api/BrontoBoard/getBrontoBoardsForUser":"a",
   // BrontoCalendar Calls
   "/api/BrontoCalendar/normalizeDateToKey": "Added as inclusion for now to force push",
   "/api/BrontoCalendar/createCalendar": "Added as inclusion for now to force push",
@@ -85,7 +87,7 @@ export const exclusions: Array<string> = [
   "/api/BrontoBoard/getAssignmentsForClass",
   "/api/BrontoBoard/getOfficeHoursForClass",
   "/api/BrontoBoard/getClassesForBrontoBoard",
-  "/api/BrontoBoard/getBrontoBoardsForUser",
+  // "/api/BrontoBoard/getBrontoBoardsForUser",
   "/api/BrontoBoard/getBrontoBoardById",
   "/api/BrontoBoard/getClassById",
   "/api/BrontoBoard/getAssignmentById",

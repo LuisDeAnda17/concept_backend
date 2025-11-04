@@ -843,7 +843,7 @@ export const GetOfficeHoursForClassResponse: Sync = ({ request, officeHours }) =
     [BrontoBoard.getOfficeHoursForClass, {}, { officeHours }],
   ),
   then: actions(
-    [Requesting.respond, { request, results: officeHours }],
+    [Requesting.respond, { request, officeHours }],
   ),
 });
 
