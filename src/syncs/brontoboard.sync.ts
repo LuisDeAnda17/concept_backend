@@ -310,7 +310,7 @@ export const AddOHRequest: Sync = (
   when: actions(
     [
       Requesting.request,
-      { path: "/api/brontoboard/officehours/add", session, class: classId, OHTime, OHduration },
+      { path: "/BrontoBoard/addOH", session, class: classId, OHTime, OHduration },
       { request },
     ],
   ),
@@ -336,7 +336,7 @@ export const AddOHResponse: Sync = (
   { request, officeHours },
 ) => ({
   when: actions(
-    [Requesting.request, { path: "/api/brontoboard/officehours/add" }, { request }],
+    [Requesting.request, { path: "/BrontoBoard/addOH" }, { request }],
     [BrontoBoard.addOH, {}, { officeHours }], // Matches success output
   ),
   then: actions(
@@ -349,7 +349,7 @@ export const AddOHResponse: Sync = (
  */
 export const AddOHError: Sync = ({ request, error }) => ({
   when: actions(
-    [Requesting.request, { path: "/api/brontoboard/officehours/add" }, { request }],
+    [Requesting.request, { path: "/BrontoBoard/addOH" }, { request }],
     [BrontoBoard.addOH, {}, { error }], // Matches error output
   ),
   then: actions(
@@ -369,7 +369,7 @@ export const ChangeOHRequest: Sync = (
   when: actions(
     [
       Requesting.request,
-      { path: "/api/brontoboard/officehours/change", session, oh, newDate, newduration },
+      { path: "/BrontoBoard/changeOH", session, oh, newDate, newduration },
       { request },
     ],
   ),
@@ -391,7 +391,7 @@ export const ChangeOHRequest: Sync = (
  */
 export const ChangeOHResponse: Sync = ({ request }) => ({
   when: actions(
-    [Requesting.request, { path: "/api/brontoboard/officehours/change" }, { request }],
+    [Requesting.request, { path: "/BrontoBoard/changeOH" }, { request }],
     [BrontoBoard.changeOH, {}, {}], // Matches success (empty) output
   ),
   then: actions(
@@ -404,7 +404,7 @@ export const ChangeOHResponse: Sync = ({ request }) => ({
  */
 export const ChangeOHError: Sync = ({ request, error }) => ({
   when: actions(
-    [Requesting.request, { path: "/api/brontoboard/officehours/change" }, { request }],
+    [Requesting.request, { path: "/BrontoBoard/changeOH" }, { request }],
     [BrontoBoard.changeOH, {}, { error }], // Matches error output
   ),
   then: actions(

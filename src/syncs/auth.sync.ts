@@ -6,7 +6,7 @@ import { Requesting, UserAuthentication, Sessioning } from "@concepts";
 // 1. Trigger UserAuthentication.register from a /register request
 export const RegisterRequestTrigger: Sync = ({ request, username, password }) => ({
   when: actions(
-    [Requesting.request, { path: "/register", username, password }, { request }],
+    [Requesting.request, { path: "/UserAuthentication/register", username, password }, { request }],
   ),
   then: actions(
     [UserAuthentication.register, { username, password }],
@@ -14,13 +14,24 @@ export const RegisterRequestTrigger: Sync = ({ request, username, password }) =>
 });
 
 // 2. Handle successful registration: create a session and respond
-export const RegisterSuccessResponse: Sync = ({ request, user, session }) => ({
+export const RegisterSuccess: Sync = ({ request, user, session }) => ({
   when: actions(
-    [Requesting.request, { path: "/register" }, { request }],
+    [Requesting.request, { path: "/UserAuthentication/register" }, { request }],
     [UserAuthentication.register, {}, { user }], // Matches successful registration
   ),
   then: actions(
     [Sessioning.create, { user }, { session }], // Create a new session for the registered user
+  ),
+});
+
+// 2. Handle successful registration: create a session and respond
+export const RegisterSuccessResponse: Sync = ({ request, user, session }) => ({
+  when: actions(
+    [Requesting.request, { path: "/UserAuthentication/register" }, { request }],
+    [UserAuthentication.register, {}, { user }], // Matches successful registration
+    [Sessioning.create, { user }, { session }], // Create a new session for the registered user
+  ),
+  then: actions(
     [Requesting.respond, { request, user, session }], // Respond with user ID and new session ID
   ),
 });
@@ -28,7 +39,7 @@ export const RegisterSuccessResponse: Sync = ({ request, user, session }) => ({
 // 3. Handle registration error: respond with the error
 export const RegisterErrorResponse: Sync = ({ request, error }) => ({
   when: actions(
-    [Requesting.request, { path: "/register" }, { request }],
+    [Requesting.request, { path: "/UserAuthentication/register" }, { request }],
     [UserAuthentication.register, {}, { error }], // Matches failed registration
   ),
   then: actions(
