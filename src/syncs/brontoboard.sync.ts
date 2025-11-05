@@ -16,7 +16,7 @@ export const InitializeBBRequest: Sync = (
   when: actions(
     [
       Requesting.request,
-      { path: "BrontoBoard/initializeBB", session, calendar },
+      { path: "/BrontoBoard/initializeBB", session, calendar },
       { request },
     ],
   ),
@@ -42,7 +42,7 @@ export const InitializeBBResponse: Sync = (
   when: actions(
     [
       Requesting.request,
-      { path: "BrontoBoard/initializeBB" },
+      { path: "/BrontoBoard/initializeBB" },
       { request },
     ],
     [BrontoBoard.initializeBB, {}, { brontoBoard }], // Matches success output
@@ -59,7 +59,7 @@ export const InitializeBBError: Sync = ({ request, error }) => ({
   when: actions(
     [
       Requesting.request,
-      { path: "BrontoBoard/initializeBB" },
+      { path: "/BrontoBoard/initializeBB" },
       { request },
     ],
     [BrontoBoard.initializeBB, {}, { error }], // Matches error output
